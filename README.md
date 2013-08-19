@@ -36,7 +36,7 @@ mocket.close
 ```ruby
 class SocketClient
   attr_accessor :adapter
-  delegate :open, to: :adapter
+  delegate :open, :setstate, to: :adapter
   
   def initialize
     self.adapter = SocketAdapter.new
@@ -45,7 +45,7 @@ end
 
 # Connecting to a socket
 client = SocketClient.new
-client.adapter.setstate(:live)
+client.setstate(:live)
 server = TCPServer.open(4000)
 client.open('127.0.0.1', 4000)
 client.write('message...')
@@ -54,7 +54,7 @@ server.close
 
 # Connecting to a mocket
 client = SocketClient.new
-client.adapter.setstate(:test)
+client.setstate(:test)
 Mocket.listen('172.31.33.7', 5000)
 client.open('172.131.33.7', 5000)
 client.write('message...')
