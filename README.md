@@ -47,17 +47,17 @@ end
 client = SocketClient.new
 client.setstate(:live)
 server = TCPServer.open(4000)
-client.open('127.0.0.1', 4000)
-client.write('message...')
-client.close
+socket = client.open('127.0.0.1', 4000)
+socket.write('message...')
+socket.close
 server.close
 
 # Connecting to a mocket
 client = SocketClient.new
 client.setstate(:test)
 Mocket.listen('172.31.33.7', 5000)
-client.open('172.131.33.7', 5000)
-client.write('message...')
-client.close
+socket = client.open('172.131.33.7', 5000)
+socket.write('message...')
+socket.close
 Mocket.reset!
 ```
